@@ -28,7 +28,7 @@ return {
         })
 
         keymap.set('n', '<leader>h', harpoon_mark.add_file, opts)
-        keymap.set('n', '<C-e>', harpoon_ui.toggle_quick_menu, opts)
+        keymap.set('n', '<leader>e', harpoon_ui.toggle_quick_menu, opts)
 
         keymap.set('n', '<leader>1', function() harpoon_ui.nav_file(1) end, opts)
         keymap.set('n', '<leader>2', function() harpoon_ui.nav_file(2) end, opts)

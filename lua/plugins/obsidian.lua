@@ -1,6 +1,6 @@
 return {
     'epwalsh/obsidian.nvim',
-    event = { 'BufReadPre C:/Users/Kevin/Documents/Obsidian Vault/**.md' },
+    event = { 'BufReadPre E:/vault/Development/*/**.md' },
     dependencies = {
         -- Required.
         'nvim-lua/plenary.nvim',
@@ -12,7 +12,7 @@ return {
         'nvim-telescope/telescope.nvim',
     },
     opts = {
-        dir = 'C:/Users/Kevin/Documents/Obsidian Vault',  -- no need to call 'vim.fn.expand' here
+        dir = 'E:/vault/Development',  -- no need to call 'vim.fn.expand' here
 
         -- see below for full list of options 👇
     },

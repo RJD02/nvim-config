@@ -5,7 +5,7 @@ global.mapleader = ' '
 global.maplocalleader = ' '
 
 -- make CTRL + C behave exactly the same as ESC
-keymap.set('i', '<C-c>', '<ESC>', opts)
+keymap.set('i', 'kj', '<ESC>', opts)
 
 -- delete one word in insert mode (note that <C-h> sends the same ASCII escape sequence as <C-BS>)
 keymap.set('i', '<C-h>', '<C-w>', opts)
@@ -30,15 +30,17 @@ keymap.set('n', '<C-d>', '<nop>', opts)
 keymap.set('n', '<C-x>', ':bd<CR>', opts)
 
 -- quickly switch between buffers
-keymap.set('n', '<', ':bp<CR>', opts)
+keymap.set('n', '?', ':bp<CR>', opts)
 keymap.set('n', '>', ':bn<CR>', opts)
+keymap.set('n', '<leader>bb', ':Telescope buffers<CR>', opts)
+keymap.set('n', '}', ':bd<CR>', opts)
 
 -- quickly switch between windows
 keymap.set('n', '<C-h>', '<C-w>h', opts)
 keymap.set('n', '<C-l>', '<C-w>l', opts)
 
 -- write to all buffers
-keymap.set('n', '<leader>w', ':wa<CR>', opts)
+keymap.set('n', '<leader>w', '<C-w>', opts)
 
 -- quit all buffers
 keymap.set('n', '<leader>q', ':qa<CR>', opts)
@@ -78,6 +80,11 @@ keymap.set('n', 'N', 'Nzzzv', opts)
 -- vertical movement keeps cursor in middle
 keymap.set('n', '<C-j>', '<C-d>zz', opts)
 keymap.set('n', '<C-k>', '<C-u>zz', opts)
+
+-- take current line up
+keymap.set('n', '<A-k>', ':m .-2<CR>==', opts)
+-- tabke current line down 
+keymap.set('n', '<A-j>', ':m .+1<CR>==', opts)
 
 -- creates a new line below the cursor and goes back into normal mode
 keymap.set('n', '<CR>', 'o<Esc>', opts)
@@ -119,3 +126,5 @@ keymap.set('v', '<C-k>', '<C-u>zz', opts)
 keymap.set('v', '<C-a>', 'ggVG', opts)
 
 keymap.set('v', '<C-d>', '"+ygvd', opts)
+
+keymap.set('n', 'q', '<C-q', opts)

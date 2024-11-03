@@ -9,7 +9,7 @@ return {
         end
 
         toggleterm.setup({
-            size = 13,
+            size = 15,
             open_mapping = [[<c-\>]],
             shade_filetypes = {},
             shade_terminals = true,
@@ -17,6 +17,9 @@ return {
             start_in_insert = true,
             persist_size = true,
             direction = 'horizontal',
+            autochdir = false,
+            shell = 'cmd.exe /k C:\\cmder\\vendor\\init.bat'
+            -- shell = vim.o.shell,
         })
     end
 }

@@ -1,0 +1,391 @@
+.\init.lua:    name = 'WslClipboard',
+.\init.lua:        ['+'] = 'clip.exe',
+.\init.lua:        ['*'] = 'clip.exe',
+.\init.lua:        ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring():gsub("\\r", ""))',
+.\init.lua:        ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring():gsub("\\r", ""))',
+.\init.lua:require('v9.options')
+.\init.lua:require('v9.keymaps')
+.\init.lua:require('v9.lazy')
+.\init.lua:require('v9.colorscheme')
+.\init.lua:vim.opt.guicursor = 'i:block'
+.\README.md:- `a` while focused on nvim-tree adds a new file (or folder, just append a '/' character)
+.\README.md:- Upon opening Neovim (and seeing the alpha dashboard), just hit `ENTER` rather than `f` for telescope's find file function since the cursor is already focused on the first option
+.\README.md:- Use visual mode and the `=` command to set all the tabs to be the same width as shiftwidth (if `:retab` doesn't work)
+.\README.md:- vim-surround enables very quick "surround" operations, like `ysiw` to surround a word with quotes or `ci"'` to replace double quotes with single quotes
+.\README.md:- `ls` restores WezTerm recoloring the shell prompt when using Neovim in Windows while SSH'd into a Linux machine
+.\after\luasnip.lua:local ls = require('luasnip')
+.\after\luasnip.lua:local date = function() return {os.date('%Y-%m-%d')} end
+.\stylua.toml:quote_style = 'AutoPreferSingle'
+.\after\ftplugin\lua.lua:vim.bo.formatoptions = 'jnqlr'
+.\lua\v9\cp.lua:    local fileName = vim.fn.expand('%')
+.\lua\v9\cp.lua:        vim.cmd('w | !g++ -std=c++11 -Wall -Wextra -Wpedantic -O2 -o a.out')
+.\lua\v9\cp.lua:        vim.cmd('!./a.out')
+.\lua\v9\cp.lua:        print('Not a C++ file')
+.\lua\v9\cp.lua:vim.keymap.nnoremap('<F5>', ':lua CompileAndRun()<CR>')
+.\lua\plugins\autopairs.lua:        'windwp/nvim-autopairs',
+.\lua\plugins\autopairs.lua:        event = { 'InsertEnter' },
+.\lua\plugins\autopairs.lua:            local npairs_status_ok, npairs = pcall(require, 'nvim-autopairs')
+.\lua\plugins\autopairs.lua:            local rule_status_ok, rule = pcall(require, 'nvim-autopairs.rule')
+.\lua\plugins\autopairs.lua:            local cond_status_ok, cond = pcall(require, 'nvim-autopairs.conds')
+.\lua\plugins\autopairs.lua:                    map = '<M-q>',
+.\lua\plugins\autopairs.lua:                    chars = { '{', '[', '(', '"', "'" },
+.\lua\plugins\autopairs.lua:                    pattern = [=[[%'%"%>%]%)%}%,]]=],
+.\lua\plugins\autopairs.lua:                    end_key = '$',
+.\lua\plugins\autopairs.lua:                    keys = 'qwertyuiopzxcvbnmasdfghjkl',
+.\lua\plugins\autopairs.lua:                    highlight = 'PmenuSel',
+.\lua\plugins\autopairs.lua:                    highlight_grey='LineNr'
+.\lua\plugins\autopairs.lua:                rule("'", "'", 'python'):with_pair(cond.before_text('f')),
+.\lua\plugins\autopairs.lua:                rule("{", "}", 'python'):with_pair(cond.is_inside_quote()),
+.\lua\plugins\autopairs.lua:        'windwp/nvim-ts-autotag',
+.\lua\plugins\autopairs.lua:        -- event = { 'InsertEnter' },
+.\lua\plugins\autopairs.lua:        --     local autotag_status_ok, autotag = pcall(require, 'nvim-ts-autotag')
+.\lua\plugins\alpha.lua:    'goolord/alpha-nvim',
+.\lua\plugins\alpha.lua:    event = 'VimEnter',
+.\lua\plugins\alpha.lua:        vim.keymap.set('n', '<leader>a', ':Alpha<CR>', opts)
+.\lua\plugins\alpha.lua:        local status_ok, alpha = pcall(require, 'alpha')
+.\lua\plugins\alpha.lua:            return require('v9.logos')['random']
+.\lua\plugins\alpha.lua:        local dashboard = require('alpha.themes.dashboard')
+.\lua\plugins\alpha.lua:            dashboard.button('f', '  Find file', ':Telescope find_files <CR>'),
+.\lua\plugins\alpha.lua:            dashboard.button('e', '  New file', ':ene <CR>'),
+.\lua\plugins\alpha.lua:            dashboard.button('r', '  Recently used files', ':Telescope oldfiles <CR>'),
+.\lua\plugins\alpha.lua:            dashboard.button('gr', '  Find text', ':Telescope live_grep <CR>'),
+.\lua\plugins\alpha.lua:            dashboard.button('n', '  Open file tree', ':NvimTreeOpen <CR>'),
+.\lua\plugins\alpha.lua:            dashboard.button('q', '  Quit Neovim', ':qa<CR>'),
+.\lua\plugins\alpha.lua:        local version = ' v' .. v.major .. '.' .. v.minor .. '.' .. v.patch
+.\lua\plugins\alpha.lua:        local datetime = os.date(' %d-%m-%Y 󱑏 %H:%M:%S')
+.\lua\plugins\alpha.lua:        vim.api.nvim_create_autocmd('User', {
+.\lua\plugins\alpha.lua:            pattern = 'LazyVimStarted',
+.\lua\plugins\alpha.lua:                local stats = require('lazy').stats()
+.\lua\plugins\alpha.lua:                    '',
+.\lua\plugins\alpha.lua:                    '',
+.\lua\plugins\alpha.lua:                    '',
+.\lua\plugins\alpha.lua:                    '',
+.\lua\plugins\alpha.lua:                    '⚡ Neovim loaded ' .. stats.count .. ' plugins in ' .. ms .. 'ms',
+.\lua\plugins\alpha.lua:        dashboard.section.footer.opts.hl = 'Type'
+.\lua\plugins\alpha.lua:        dashboard.section.header.opts.hl = 'Include'
+.\lua\plugins\alpha.lua:        dashboard.section.buttons.opts.hl = 'Keyword'
+.\lua\plugins\alpha.lua:        -- vim.keymap.set('n', '<leader>a', ':Alpha<CR>', opts)
+.\lua\plugins\alpha.lua:        -- require 'alpha.term'
+.\lua\plugins\alpha.lua:        --     return path:sub(-4) == 'ccat'
+.\lua\v9\lazy.lua:local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+.\lua\v9\lazy.lua:        'git',
+.\lua\v9\lazy.lua:        'clone',
+.\lua\v9\lazy.lua:        '--filter=blob:none',
+.\lua\v9\lazy.lua:        'https://github.com/folke/lazy.nvim.git',
+.\lua\v9\lazy.lua:        '--branch=stable', -- latest stable release
+.\lua\v9\lazy.lua:require('lazy').setup('plugins')
+.\lua\plugins\comment.lua:    'numToStr/Comment.nvim',
+.\lua\plugins\comment.lua:    event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\comment.lua:        local status_ok, comment = pcall(require, 'Comment')
+.\lua\v9\options.lua:set.backspace = '2'
+.\lua\v9\options.lua:set.cursorlineopt = 'number'
+.\lua\v9\options.lua:set.formatoptions:remove({ 'c', 'r', 'o' })
+.\lua\v9\options.lua:set.winbar = " %{%v:lua.vim.fn.expand('%F')%}  %{%v:lua.require'nvim-navic'.get_location()%}"
+.\lua\v9\options.lua:-- set.clipboard = 'unnamedplus'
+.\lua\plugins\copilot.lua:        require('copilot').setup({
+.\lua\plugins\copilot.lua:            vim.keymap.nnoremap({ "<A-\\>", "<Cmd>lua require('copilot').accept_suggestion()<CR>" }),
+.\lua\plugins\bufferline.lua:    'akinsho/bufferline.nvim',
+.\lua\plugins\bufferline.lua:        'nvim-tree/nvim-web-devicons'
+.\lua\plugins\bufferline.lua:    event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\bufferline.lua:        local bufferline = require('bufferline')
+.\lua\plugins\bufferline.lua:                        filetype = 'NvimTree',
+.\lua\plugins\bufferline.lua:                        text = 'NvimTree',
+.\lua\plugins\bufferline.lua:                        highlight = 'Directory',
+.\lua\plugins\bufferline.lua:                        text_align = 'center'
+.\lua\plugins\bufferline.lua:                separator_style = 'slant',
+.\lua\plugins\bufferline.lua:                    reveal = {'close'}
+.\lua\plugins\bufferline.lua:                    style = 'icon'
+.\lua\v9\logos.lua:        '                                   ',
+.\lua\v9\logos.lua:        '                                   ',
+.\lua\v9\logos.lua:        '                                   ',
+.\lua\v9\logos.lua:        '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ',
+.\lua\v9\logos.lua:        '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
+.\lua\v9\logos.lua:        '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
+.\lua\v9\logos.lua:        '           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
+.\lua\v9\logos.lua:        '          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
+.\lua\v9\logos.lua:        '   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
+.\lua\v9\logos.lua:        '  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
+.\lua\v9\logos.lua:        ' ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
+.\lua\v9\logos.lua:        ' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ',
+.\lua\v9\logos.lua:        '      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
+.\lua\v9\logos.lua:        '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
+.\lua\v9\logos.lua:        '                                   ',
+.\lua\v9\logos.lua:        '                                                     ',
+.\lua\v9\logos.lua:        '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+.\lua\v9\logos.lua:        '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
+.\lua\v9\logos.lua:        '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
+.\lua\v9\logos.lua:        '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+.\lua\v9\logos.lua:        '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+.\lua\v9\logos.lua:        '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+.\lua\v9\logos.lua:        '                                                     ',
+.\lua\v9\logos.lua:        if key == 'random' then
+.\lua\plugins\format-on-save.lua:    'elentok/format-on-save.nvim',
+.\lua\plugins\format-on-save.lua:    event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\format-on-save.lua:        local format_on_save = require('format-on-save')
+.\lua\plugins\format-on-save.lua:        local formatters = require('format-on-save.formatters')
+.\lua\plugins\format-on-save.lua:                '/node_modules/',
+.\lua\plugins\format-on-save.lua:                '.local/share/nvim/lazy',
+.\lua\plugins\games.lua:        'luk400/vim-lichess',
+.\lua\plugins\games.lua:        event = 'VeryLazy',
+.\lua\plugins\games.lua:            -- lower my ELO (or boost me), I don't care :)
+.\lua\plugins\games.lua:            vim.g.lichess_api_token = 'lip_ETrgIHObUoa63yibFO4W'
+.\lua\plugins\games.lua:            vim.g.lichess_variant = 'standard'
+.\lua\plugins\games.lua:            vim.g.lichess_color = 'random'
+.\lua\plugins\games.lua:            vim.g.python_cmd = 'python3'
+.\lua\plugins\games.lua:        'alec-gibson/nvim-tetris',
+.\lua\plugins\games.lua:        cmd = 'Tetris'
+.\lua\plugins\games.lua:        'ThePrimeagen/vim-be-good',
+.\lua\plugins\games.lua:        cmd = 'VimBeGood'
+.\lua\plugins\fugitive.lua:    'tpope/vim-fugitive',
+.\lua\plugins\fugitive.lua:    event = 'VimEnter'
+.\lua\v9\keymaps.lua:global.mapleader = ' '
+.\lua\v9\keymaps.lua:global.maplocalleader = ' '
+.\lua\v9\keymaps.lua:keymap.set('i', 'kj', '<ESC>', opts)
+.\lua\v9\keymaps.lua:keymap.set('i', '<C-h>', '<C-w>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', 'H', '^', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', 'L', '$', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<leader>l', ':Lazy<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-u>', ':UndotreeToggle<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-d>', '<nop>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-x>', ':bd<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<', ':bp<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '>', ':bn<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-h>', '<C-w>h', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-l>', '<C-w>l', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<leader>w', '<C-w>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<leader>q', ':qa<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<leader>fq', ':qa!<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', 'zz', 'zz:noh<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-t>', ':TransparentToggle<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<leader>t', ':Themery<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+.\lua\v9\keymaps.lua:keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', 'J', 'mzJ`z', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-a>', 'ggVG', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<TAB>', '>>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<S-TAB>', '<<', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', 'n', 'nzzzv', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', 'N', 'Nzzzv', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-j>', '<C-d>zz', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-k>', '<C-u>zz', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<CR>', 'o<Esc>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<A-CR>', 'O<Esc>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-up>', ':resize -2<cr>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-down>', ':resize +2<cr>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-left>', ':vertical resize -2<cr>', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<C-c>', '"+y', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<leader>y', '"*y', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', 'x', '"_x', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<TAB>', '<S->>gv', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<S-TAB>', '<S-<>gv', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<leader>p', '"_dP', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', 'J', ":m '>+1<CR>gv=gv", opts)
+.\lua\v9\keymaps.lua:keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<C-j>', '<C-d>zz', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<C-k>', '<C-u>zz', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<C-a>', 'ggVG', opts)
+.\lua\v9\keymaps.lua:keymap.set('v', '<C-d>', '"+ygvd', opts)
+.\lua\v9\keymaps.lua:keymap.set('n', 'q', '<C-q', opts)
+.\lua\plugins\harpoon.lua:    'ThePrimeagen/harpoon',
+.\lua\plugins\harpoon.lua:    event = 'VimEnter',
+.\lua\plugins\harpoon.lua:        local harpoon_status_ok, harpoon = pcall(require, 'harpoon')
+.\lua\plugins\harpoon.lua:        local harpoon_mark_status_ok, harpoon_mark = pcall(require, 'harpoon.mark')
+.\lua\plugins\harpoon.lua:        local harpoon_ui_status_ok, harpoon_ui = pcall(require, 'harpoon.ui')
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>h', harpoon_mark.add_file, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>e', harpoon_ui.toggle_quick_menu, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>1', function() harpoon_ui.nav_file(1) end, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>2', function() harpoon_ui.nav_file(2) end, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>3', function() harpoon_ui.nav_file(3) end, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>4', function() harpoon_ui.nav_file(4) end, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>5', function() harpoon_ui.nav_file(5) end, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>6', function() harpoon_ui.nav_file(6) end, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>7', function() harpoon_ui.nav_file(7) end, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>8', function() harpoon_ui.nav_file(8) end, opts)
+.\lua\plugins\harpoon.lua:        keymap.set('n', '<leader>9', function() harpoon_ui.nav_file(9) end, opts)
+.\lua\plugins\indent.lua:    'lukas-reineke/indent-blankline.nvim',
+.\lua\plugins\indent.lua:    event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\indent.lua:        require('indent_blankline').setup({
+.\lua\plugins\indent.lua:                'IndentBlanklineIndent1',
+.\lua\plugins\hardtime.lua:    'm4xshen/hardtime.nvim',
+.\lua\plugins\hardtime.lua:        local ok, hardtime = pcall(require, 'hardtime')
+.\lua\plugins\kanban.lua:    'arakkkkk/kanban.nvim',
+.\lua\plugins\kanban.lua:    cmd = { 'KanbanCreate', 'KanbanOpen' },
+.\lua\plugins\kanban.lua:        require('kanban').setup({
+.\lua\plugins\kanban.lua:                description_folder = './../kanban',  -- Path to save the file corresponding to the task.
+.\lua\plugins\kanban.lua:                list_head = '## ',
+.\lua\plugins\lsp.lua:        'folke/neodev.nvim',
+.\lua\plugins\lsp.lua:        event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\lsp.lua:            local neodev_status_ok, neodev = pcall(require, 'neodev')
+.\lua\plugins\lsp.lua:        'VonHeikemen/lsp-zero.nvim',
+.\lua\plugins\lsp.lua:        event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\lsp.lua:        cmd = 'Mason',
+.\lua\plugins\lsp.lua:        branch = 'v2.x',
+.\lua\plugins\lsp.lua:            { 'neovim/nvim-lspconfig' },
+.\lua\plugins\lsp.lua:                'williamboman/mason.nvim',
+.\lua\plugins\lsp.lua:                    pcall(vim.cmd, 'MasonUpdate')
+.\lua\plugins\lsp.lua:            { 'williamboman/mason-lspconfig.nvim', },
+.\lua\plugins\lsp.lua:            { 'hrsh7th/nvim-cmp' },
+.\lua\plugins\lsp.lua:            { 'hrsh7th/cmp-nvim-lsp' },
+.\lua\plugins\lsp.lua:            { 'L3MON4D3/LuaSnip' },
+.\lua\plugins\lsp.lua:            { 'SmiteshP/nvim-navic' }
+.\lua\plugins\lsp.lua:            local lsp = require('lsp-zero').preset({})
+.\lua\plugins\lsp.lua:            local navic = require('nvim-navic')
+.\lua\plugins\lsp.lua:            require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+.\lua\plugins\lsp.lua:                'pyright',
+.\lua\plugins\lsp.lua:                'lua_ls',
+.\lua\plugins\lsp.lua:                'gopls',
+.\lua\plugins\lsp.lua:                'clangd'
+.\lua\plugins\lsp.lua:            local cmp = require('cmp')
+.\lua\plugins\lsp.lua:            -- local cmp_action = require('lsp-zero').cmp_action()
+.\lua\plugins\lsp.lua:            require('luasnip.loaders.from_vscode').lazy_load()
+.\lua\plugins\lsp.lua:                    { name = 'nvim_lsp' },
+.\lua\plugins\lsp.lua:                    { name = 'luasnip' },
+.\lua\plugins\lsp.lua:                    ['<A-j>'] = cmp.mapping.select_next_item(cmp_select),
+.\lua\plugins\lsp.lua:                    ['<A-k>'] = cmp.mapping.select_prev_item(cmp_select),
+.\lua\plugins\lsp.lua:                    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+.\lua\plugins\lsp.lua:                    ['<C-Space>'] = cmp.mapping.complete(),
+.\lua\plugins\lsp.lua:                        require('luasnip').lsp_expand(args.body)
+.\lua\plugins\lsp.lua:    { 'saadparwaiz1/cmp_luasnip' },
+.\lua\plugins\lsp.lua:    { 'rafamadriz/friendly-snippets' },
+.\lua\plugins\lsp.lua:    --     'dgagn/diagflow.nvim',
+.\lua\plugins\lsp.lua:    --         -- placement = 'inline',
+.\lua\plugins\lsp.lua:    --         scope = 'line',
+.\lua\plugins\gitsigns.lua:    'lewis6991/gitsigns.nvim',
+.\lua\plugins\gitsigns.lua:    event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\gitsigns.lua:        local status_ok, gitsigns = pcall(require, 'gitsigns')
+.\pack\nvim-treesitter\start\scripts\run_tests.sh:        -c "PlenaryBustedDirectory $1 { minimal_init = './scripts/minimal_init.lua' }"
+.\pack\nvim-treesitter\start\scripts\run_tests.sh:if [[ $2 = '--summary' ]]; then
+.\pack\nvim-treesitter\start\scripts\run_tests.sh:    run tests/$1  2> /dev/null | grep -E '^\S*(Testing|Success|Failed|Errors)\s*:'
+.\pack\nvim-treesitter\start\scripts\update-lockfile.sh:    done < <(jq 'keys|@sh' -c lockfile.json)
+.\lua\plugins\markdown.lua:        'iamcco/markdown-preview.nvim',
+.\lua\plugins\markdown.lua:        build = 'cd app && npm install',
+.\lua\plugins\markdown.lua:            vim.g.mkdp_filetypes = { 'markdown' }
+.\lua\plugins\markdown.lua:            vim.keymap.set('n', '<leader>m', '<Plug>MarkdownPreviewToggle', { desc = 'Markdown Preview' })
+.\lua\plugins\lualine.lua:    'nvim-lualine/lualine.nvim',
+.\lua\plugins\lualine.lua:    event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\lualine.lua:        local status_ok, lualine = pcall(require, 'lualine')
+.\lua\plugins\lualine.lua:                theme = 'auto',
+.\lua\plugins\lualine.lua:                        'filename',
+.\lua\plugins\nvim-dap.lua:        'rcarriga/nvim-dap-ui',
+.\lua\plugins\nvim-dap.lua:            'mfussenegger/nvim-dap'
+.\lua\plugins\nvim-dap.lua:            require('dapui').setup()
+.\lua\plugins\nvim-dap.lua:        'leoluz/nvim-dap-go',
+.\lua\plugins\nvim-dap.lua:            'mfussenegger/nvim-dap'
+.\lua\plugins\nvim-dap.lua:            require('dap-go').setup()
+.\lua\plugins\noice.lua:    'folke/noice.nvim',
+.\lua\plugins\noice.lua:    event = 'VimEnter',
+.\lua\plugins\noice.lua:        'MunifTanjim/nui.nvim',
+.\lua\plugins\noice.lua:        'rcarriga/nvim-notify',
+.\lua\plugins\noice.lua:        local status_ok, noice = pcall(require, 'noice')
+.\lua\plugins\noice.lua:                    ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+.\lua\plugins\noice.lua:                    ['vim.lsp.util.stylize_markdown'] = true,
+.\lua\plugins\noice.lua:                    ['cmp.entry.get_documentation'] = true,
+.\lua\plugins\noice.lua:        require('notify').setup({
+.\lua\plugins\noice.lua:            background_color = '#ff0000',
+.\lua\plugins\obsidian.lua:    'epwalsh/obsidian.nvim',
+.\lua\plugins\obsidian.lua:    event = { 'BufReadPre E:/vault/Development/*/**.md' },
+.\lua\plugins\obsidian.lua:        'nvim-lua/plenary.nvim',
+.\lua\plugins\obsidian.lua:        'hrsh7th/nvim-cmp',
+.\lua\plugins\obsidian.lua:        'nvim-telescope/telescope.nvim',
+.\lua\plugins\obsidian.lua:        dir = 'E:/vault/Development',  -- no need to call 'vim.fn.expand' here
+.\lua\plugins\obsidian.lua:        require('obsidian').setup(opts)
+.\lua\plugins\obsidian.lua:        -- Optional, override the 'gf' keymap to utilize Obsidian's search functionality.
+.\lua\plugins\obsidian.lua:        -- see also: 'follow_url_func' config option below.
+.\lua\plugins\obsidian.lua:        vim.keymap.set('n', 'gf', function()
+.\lua\plugins\obsidian.lua:            if require('obsidian').util.cursor_on_markdown_link() then
+.\lua\plugins\obsidian.lua:                return '<cmd>ObsidianFollowLink<CR>'
+.\lua\plugins\obsidian.lua:                return 'gf'
+.\lua\plugins\persistence.lua:    'folke/persistence.nvim',
+.\lua\plugins\persistence.lua:    event = 'BufReadPre',
+.\lua\plugins\persistence.lua:    opts = { options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp' } },
+.\lua\plugins\persistence.lua:        { '<leader>ps', function() require('persistence').load() end, desc = 'Restore Session' },
+.\lua\plugins\persistence.lua:        { '<leader>pl', function() require('persistence').load({ last = true }) end, desc = 'Restore Last Session' },
+.\lua\plugins\persistence.lua:        { '<leader>pd', function() require('persistence').stop() end, desc = "Don't Save Current Session" },
+.\lua\plugins\rainbow.lua:    'HiPhish/rainbow-delimiters.nvim',
+.\lua\plugins\rainbow.lua:    event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\rainbow.lua:        local rainbow_delimiters = require 'rainbow-delimiters'
+.\lua\plugins\rainbow.lua:                [''] = rainbow_delimiters.strategy['global'],
+.\lua\plugins\rainbow.lua:                vim = rainbow_delimiters.strategy['local'],
+.\lua\plugins\rainbow.lua:                [''] = 'rainbow-delimiters',
+.\lua\plugins\rainbow.lua:                lua = 'rainbow-blocks',
+.\lua\plugins\rainbow.lua:                'RainbowDelimiterRed',
+.\lua\plugins\rainbow.lua:                'RainbowDelimiterYellow',
+.\lua\plugins\rainbow.lua:                'RainbowDelimiterBlue',
+.\lua\plugins\rainbow.lua:                'RainbowDelimiterOrange',
+.\lua\plugins\rainbow.lua:                'RainbowDelimiterGreen',
+.\lua\plugins\rainbow.lua:                'RainbowDelimiterViolet',
+.\lua\plugins\rainbow.lua:                'RainbowDelimiterCyan',
+.\lua\plugins\startuptime.lua:    'dstein64/vim-startuptime',
+.\lua\plugins\startuptime.lua:    cmd = 'StartupTime'
+.\lua\plugins\surround.lua:    'tpope/vim-surround',
+.\lua\plugins\surround.lua:    event = { 'BufReadPre', 'BufNewFile' }
+.\lua\plugins\telescope.lua:    'nvim-telescope/telescope.nvim',
+.\lua\plugins\telescope.lua:    event = 'VimEnter',
+.\lua\plugins\telescope.lua:        'nvim-lua/plenary.nvim'
+.\lua\plugins\telescope.lua:        local status_ok, telescope = pcall(require, 'telescope')
+.\lua\plugins\telescope.lua:        local builtin = require('telescope.builtin')
+.\lua\plugins\telescope.lua:        vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
+.\lua\plugins\telescope.lua:        vim.keymap.set('n', '<leader>r', builtin.oldfiles, {})
+.\lua\plugins\telescope.lua:        vim.keymap.set('n', '<leader>gr', builtin.live_grep, {})
+.\lua\plugins\telescope.lua:        vim.keymap.set('n', '<leader>fj', builtin.help_tags, {})
+.\lua\plugins\themery.lua:    'zaldih/themery.nvim',
+.\lua\plugins\themery.lua:    cmd = 'Themery',
+.\lua\plugins\themery.lua:        local status_ok, themery = pcall(require, 'themery')
+.\lua\plugins\themery.lua:                    name = 'material',
+.\lua\plugins\themery.lua:                    colorscheme = 'material',
+.\lua\plugins\themery.lua:                    before = [[vim.g.material_style = 'darker']]
+.\lua\plugins\themery.lua:                    name = 'vscode',
+.\lua\plugins\themery.lua:                    colorscheme = 'vscode',
+.\lua\plugins\themery.lua:                    name = 'gruvbox',
+.\lua\plugins\themery.lua:                    colorscheme = 'gruvbox-baby',
+.\lua\plugins\themery.lua:                    name = 'catppuccin',
+.\lua\plugins\themery.lua:                    colorscheme = 'catppuccin',
+.\lua\plugins\themery.lua:                    name = 'tokyonight',
+.\lua\plugins\themery.lua:                    colorscheme = 'tokyonight'
+.\lua\plugins\themery.lua:            themeConfigFile = '~/.config/nvim/lua/v9/colorscheme.lua',
+.\lua\plugins\todo.lua:    'folke/todo-comments.nvim',
+.\lua\plugins\todo.lua:    dependencies = { 'nvim-lua/plenary.nvim' },
+.\lua\plugins\todo.lua:    event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\toggleterm.lua:    'akinsho/toggleterm.nvim',
+.\lua\plugins\toggleterm.lua:    event = 'VimEnter',
+.\lua\plugins\toggleterm.lua:        local status_ok, toggleterm = pcall(require, 'toggleterm')
+.\lua\plugins\toggleterm.lua:            shading_factor = '1',
+.\lua\plugins\toggleterm.lua:            direction = 'horizontal',
+.\lua\plugins\toggleterm.lua:            shell = 'cmd.exe /k C:\\cmder\\vendor\\init.bat'
+.\lua\plugins\themes.lua:    {'marko-cerovac/material.nvim'},
+.\lua\plugins\themes.lua:    {'Mofiqul/vscode.nvim'},
+.\lua\plugins\themes.lua:    {'luisiacc/gruvbox-baby'},
+.\lua\plugins\themes.lua:    {'folke/tokyonight.nvim'},
+.\lua\plugins\themes.lua:    {'catppuccin/nvim'}
+.\lua\plugins\transparent.lua:    'xiyaowong/transparent.nvim',
+.\lua\plugins\transparent.lua:    cmd = 'TransparentToggle',
+.\lua\plugins\transparent.lua:        local transparent_status_ok, transparent = pcall(require, 'transparent')
+.\lua\plugins\transparent.lua:                'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+.\lua\plugins\transparent.lua:                'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+.\lua\plugins\transparent.lua:                'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+.\lua\plugins\transparent.lua:                'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'NormalSB', 'Pmenu',
+.\lua\plugins\transparent.lua:                'NormalFloat', -- plugins which have float panel such as Lazy, Mason, LspInfo
+.\lua\plugins\transparent.lua:                'FloatBorder',
+.\lua\plugins\transparent.lua:                'NvimTreeWinSeparator',
+.\lua\plugins\transparent.lua:                'NvimTreeNormal',
+.\lua\plugins\transparent.lua:                'NvimTreeNormalNC',
+.\lua\plugins\transparent.lua:                'TroubleNormal',
+.\lua\plugins\transparent.lua:                'TelescopeNormal',
+.\lua\plugins\transparent.lua:                'TelescopeBorder',
+.\lua\plugins\transparent.lua:                'WhichKeyFloat',
+.\lua\plugins\trouble.lua:    'folke/trouble.nvim',
+.\lua\plugins\trouble.lua:    dependencies = { 'nvim-tree/nvim-web-devicons' },
+.\lua\plugins\trouble.lua:        vim.keymap.set('n', ';t', '<cmd>TroubleToggle<cr>', {silent = true, noremap = true})
+.\lua\plugins\treesitter.lua:        'nvim-treesitter/nvim-treesitter',
+.\lua\plugins\treesitter.lua:        event = { 'BufReadPre', 'BufNewFile' },
+.\lua\plugins\treesitter.lua:        cmd = { 'TSInstallInfo', 'TSInstall' },
+.\lua\plugins\treesitter.lua:            require 'nvim-treesitter.install'.compilers = { "gcc"}
+.\lua\plugins\treesitter.lua:            local status_ok, treesitter = pcall(require, 'nvim-treesitter.configs')
+.\lua\plugins\treesitter.lua:                ensure_installed = { 'lua', 'vim', 'python', 'markdown_inline', 'go' },
+.\lua\plugins\treesitter.lua:                    disable = { 'go' }
+.\lua\plugins\zen.lua:    'folke/zen-mode.nvim',
+.\lua\plugins\zen.lua:    event = 'VeryLazy',
+.\lua\plugins\zen.lua:        { '<leader>z', function() require('zen-mode').toggle() end, desc = 'Toggle Zen Mode' },
+.\lua\plugins\undotree.lua:    'mbbill/undotree'
